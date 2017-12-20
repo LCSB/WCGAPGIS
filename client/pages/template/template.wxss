@@ -1,0 +1,103 @@
+/* pages/template/template.wxss *//* pages/collection/collection.wxss */
+page {
+    background: #f8f8f8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+}
+.container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+.form {
+    flex: 1;
+    width: 100%;
+}
+.form > view {
+    background: #FFFFFF;
+    width: calc(100% - 40rpx);
+    display: flex;
+    justify-content: space-between;
+    margin: 10rpx;
+    font-size: 36rpx;
+    line-height: 60rpx;
+}
+button {
+    height: 62rpx;
+    line-height: 60rpx;
+    text-align: center;
+    background-color: rgba(255, 0, 0, 0);
+}
+button:after {
+    font-size: 50rpx;
+    line-height: 120rpx;
+    color: #FFFFFF;
+    text-align: center;
+    border-radius: 10rpx;
+    background-color: #1890ff;
+}
+#submit {
+    width: calc(100% - 40rpx);
+    margin: 20rpx;
+    height: 80rpx;
+}
+#submit:after {
+    content: "提交";
+    line-height: 160rpx;
+    font-size: 60rpx;
+}
+.params input, .params picker {
+  background: #FFFFFF;
+  margin: 0 10rpx;
+  height: 60rpx;
+  font-size: 30rpx;
+}
+.params label {
+  flex-basis: 120rpx;
+  background: #1890ff !important;
+  color: #FFFFFF;
+  text-align: center;
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  font-size: 30rpx;
+}
+.params input {
+  flex: 1;
+}
+.params picker {
+  flex-basis: 120rpx;
+}
+.delete, #create {
+  height:42rpx;
+  width: 42rpx;
+  line-height: 40rpx;
+  background-color: rgba(255, 0, 0, 0);
+  margin: 10rpx;
+}
+.delete:after, #create:after {
+  flex-basis: 80rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  height: 80rpx;
+  width: 80rpx;
+  line-height: 58rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  background-color: #FFFFFF;
+  border-width: 10rpx;
+}
+.delete:after {
+  content: "-";
+  border-color: #f5222d;
+  color: #f5222d;
+}
+#create:after {
+  content: "+";
+  border-color: #1890ff;
+  color: #1890ff;
+}
+input {
+  flex: 1;
+}

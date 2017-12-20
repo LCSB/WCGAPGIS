@@ -1,0 +1,26 @@
+<!--pages/collection/collection.wxml-->
+<view class="container">
+    <map></map>
+    <view class="form">
+      <view class="selectTemplate">
+        <picker bindchange="bindPickerChange" range-key="name" range="{{templates}}">
+          <view class="picker">
+            请选择模版：{{templates[index].name}}
+          </view>
+        </picker>
+        <navigator url="../template/template" open-type="navigate">
+          <button id="addTemplate"></button>
+        </navigator>
+      </view>
+      <view>
+        <view>采集点名称：</view>
+        <input/>
+      </view>
+    </view>
+    <view>建设中: 自定义表单项</view>
+          <input wx:if="{{item.type === 'text'}}" data-index="{{index}}" bindinput="paramValueChange" value="{{item.title}}" />
+          <input wx:if="{{item.type === 'number'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" value="{{item.title}}" />
+          <input wx:if="{{item.type === 'digit'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" value="{{item.title}}" />
+          <picker wx:if="{{item.type === 'date'}}" data-index="{{index}}" mode="date" bindchange="paramValueChange" value="{{item.title}}">{{item.title}}</picker>
+    <button id="submit"></button>
+</view>

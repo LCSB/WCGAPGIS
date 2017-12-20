@@ -1,0 +1,20 @@
+<!--pages/collection/collection.wxml-->
+<view class="container">
+    <view class="form">
+      <view>
+        <view>模版名称：</view>
+        <input />
+      </view>
+      <view style="background: rgba(0,0,0,0)">
+        <label>自定义字段信息</label>
+        <button bindtap="createParam" id="create"></button>
+      </view>
+      <view class="params" wx:for="{{params}}" wx:key="{{index}}">
+      <label>{{"字段" + (index+1)}}</label>
+      <input data-index="{{index}}" bindinput="paramValueChange" value="{{item.title}}" />
+      <picker data-index="{{index}}" bindchange="typeValueChange" range-key="title" range="{{type}}">{{item.typeName}}</picker>
+      <button bindtap="deleteParam" data-index="{{index}}" class="delete"></button>
+      </view>
+    </view>
+    <button id="submit"></button>
+</view>

@@ -8,9 +8,11 @@ Page({
         userInfo: {},
         logged: false,
         takeSession: false,
-        requestResult: ''
+        requestResult: '',
     },
-
+    onLoad: function() {
+        this.setData({ templates: getApp().templates });
+    },
     // 用户登录示例
     login: function() {
         if (this.data.logged) return
