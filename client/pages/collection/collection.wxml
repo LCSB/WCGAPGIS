@@ -1,26 +1,43 @@
 <!--pages/collection/collection.wxml-->
 <view class="container">
-    <map></map>
-    <view class="form">
-      <view class="selectTemplate">
-        <picker bindchange="bindPickerChange" range-key="name" range="{{templates}}">
-          <view class="picker">
-            请选择模版：{{templates[index].name}}
-          </view>
-        </picker>
-        <navigator url="../template/template" open-type="navigate">
-          <button id="addTemplate"></button>
-        </navigator>
-      </view>
-      <view>
-        <view>采集点名称：</view>
-        <input/>
-      </view>
+  <map markers="{{markers}}" longitude="{{longitude}}" latitude="{{latitude}}"></map>
+  <scroll-view scroll-y="{{true}}" class="form">
+    <view class="params">
+      <picker bindchange="bindPickerChange" range-key="name" range="{{templates}}">
+        <text>
+            请选择模版: {{templates[index].name}}
+        </text>
+      </picker>
+      <navigator url="../template/template" open-type="navigate"> 
+        <button id="addTemplate"></button> 
+      </navigator> 
     </view>
-    <view>建设中: 自定义表单项</view>
-          <input wx:if="{{item.type === 'text'}}" data-index="{{index}}" bindinput="paramValueChange" value="{{item.title}}" />
-          <input wx:if="{{item.type === 'number'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" value="{{item.title}}" />
-          <input wx:if="{{item.type === 'digit'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" value="{{item.title}}" />
-          <picker wx:if="{{item.type === 'date'}}" data-index="{{index}}" mode="date" bindchange="paramValueChange" value="{{item.title}}">{{item.title}}</picker>
+    <label>固定字段</label>
+    <view class="params">
+      <text>采集点名称</text>
+      <input placeholder='请输入采集点名称' placeholder-class='inputPH'></input>
+    </view>
+    <view class="params">
+      <text>位置</text>
+      <button id="currentLocation" bindtap="getCurrentLocation"></button>
+      <button id="assignLocation" bindtap="getAssignLocation"></button>
+    </view>
+    <label>自定义字段</label>
+    <view class="params" wx:for="{{params}}" wx:key="{{item.title}}">
+      <text>{{item.title}}</text>
+      <input wx:if="{{item.type === 'text'}}" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.title}}" placeholder-class='inputPH' value="{{item.value}}"/>
+      <input wx:if="{{item.type === 'number'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" placeholder="{{'点击输入' + item.title}}" placeholder-class='inputPH' value="{{item.value}}"/>
+      <input wx:if="{{item.type === 'digit'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" placeholder="{{'点击输入' + item.title}}" placeholder-class='inputPH' value="{{item.value}}"/>
+      <picker wx:if="{{item.type === 'date'}}" data-index="{{index}}" mode="date" bindchange="paramValueChange" value="{{item.value}}">
+        <text class="inputPH">{{item.value || "2017-12-21"}}</text>
+      </picker>
+      <picker wx:if="{{item.type === 'time'}}" data-index="{{index}}" mode="time" bindchange="paramValueChange" value="{{item.value}}">
+        <text class="inputPH">{{item.value || "2017-12-21"}}</text>
+      </picker>
+      <picker wx:if="{{item.type === 'region'}}" data-index="{{index}}" mode="region" bindchange="paramValueChange" value="{{['湖北省', '武汉市']}}">
+        <text class="inputPH">{{item.value}}</text>
+      </picker>
+    </view>
     <button id="submit"></button>
+  </scroll-view>
 </view>

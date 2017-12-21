@@ -11,6 +11,14 @@ Page({
         requestResult: '',
     },
     onLoad: function() {
+        wx.request({
+            url: config.service.requestUrl,
+            method: "GET",
+            data: {},
+            success: function(res) {
+                console.log(res)
+            }
+        })
         this.setData({ templates: getApp().templates });
     },
     // 用户登录示例

@@ -5,6 +5,26 @@ Page({
    * 页面的初始数据
    */
   data: {
+    longitude: "114.3701929",
+    latitude: "30.884436244",
+    markers: [],
+    params: [{
+      title: "姓名",
+      type: "text",
+      typeName: "文本"
+    }, {
+      title: "发起日期",
+      type: "date",
+      typeName: "日期"
+    }, {
+      title: "发货地区",
+      type: "region",
+      typeName: "地区"
+    }, {
+      title: "价格",
+      type: "digit",
+      typeName: "数字"
+    }],
   },
 
   /**
@@ -12,6 +32,19 @@ Page({
    */
   onLoad: function (options) {
     this.setData({ templates: getApp().templates });
+    wx.setNavigationBarTitle({
+      title: '添加采集点'
+    });
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res)
+        this.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+      }.bind(this)
+    });
   },
 
   /**
@@ -67,4 +100,43 @@ Page({
       index: e.detail.value
     })
   },
+
+  getCurrentLocation: function() {
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        this.setData({
+          markers: [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+            iconPath: "../index/marker.svg"
+          }],
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+      }.bind(this)
+    })
+  },
+  getAssignLocation: function(){
+    wx.chooseLocation({
+      success: function (res) {
+        this.setData({
+          markers: [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+            iconPath: "../index/marker.svg"
+          }],
+          latitude: res.latitude,
+          longitude: res.longitude
+        });
+      }.bind(this)
+    })
+  },
+  paramValueChange: function(e){
+    var index = e.currentTarget.dataset.index;
+    this.data.params[index].value = e.detail.value;
+    this.setData({
+      params: this.data.params
+    })
+  }
 })

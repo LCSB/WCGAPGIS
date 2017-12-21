@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-    <map></map>
+    <map longitude="114.31665" latitude="30.554408"></map>
     <navigator url="../collection/collection" open-type="navigate">
       <button id="addCollection"></button>
     </navigator>

@@ -15,7 +15,7 @@ page {
     flex: 1;
     width: 100%;
 }
-.form > view {
+.params {
     background: #FFFFFF;
     width: calc(100% - 20rpx);
     display: flex;
@@ -26,13 +26,6 @@ page {
 }
 map {
     flex: 1;
-    width: 100%;
-}
-picker {
-    flex: 1;
-    /* padding-left: 35rpx; */
-}
-.picker {
     width: 100%;
 }
 button {
@@ -49,7 +42,7 @@ button:after {
     border-radius: 10rpx;
     background-color: #1890ff;
 }
-#addTemplate {
+#addTemplate, #currentLocation, #assignLocation {
     flex-basis: 120rpx;
     width: 120rpx;
 }
@@ -66,6 +59,29 @@ button:after {
     line-height: 160rpx;
     font-size: 60rpx;
 }
-input {
+#currentLocation:after {
+    content: "我的位置";
+}
+#assignLocation:after {
+    content: "指定位置";
+}
+view text {
+  flex-basis: 150rpx;
+  text-align-last: justify;
+  text-align: justify;
+  padding-right: 20rpx;
+}
+text {
+  font-size: 30rpx;
+}
+.inputPH {
+  font-size: 30rpx;
+  padding: 5rpx;
+}
+picker, input{
   flex: 1;
+}
+label {
+  padding: 10rpx;
+  font-size: 32rpx;
 }
