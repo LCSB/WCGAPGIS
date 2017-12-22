@@ -3,7 +3,7 @@ const CONF = {
     rootPathname: '',
 
     // 微信小程序 App ID
-    appId: '',
+    appId: 'wxca7da6fa602aa900',
 
     // 微信小程序 App Secret
     appSecret: '',
@@ -21,7 +21,7 @@ const CONF = {
         port: 3306,
         user: 'root',
         db: 'cAuth',
-        pass: 'wxca7da6fa602aa900',
+        pass: 'Init1234',
         char: 'utf8mb4'
     },
 
@@ -36,7 +36,7 @@ const CONF = {
         // 文件夹
         uploadFolder: ''
     },
-
+   
     // 微信登录态有效期
     wxLoginExpires: 7200,
     wxMessageToken: 'abcdefgh'
