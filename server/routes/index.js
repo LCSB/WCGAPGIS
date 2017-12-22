@@ -32,12 +32,15 @@ router.get('/message', controllers.message.get)
 // POST 用来处理微信转发过来的客服消息
 router.post('/message', controllers.message.post)
 
+//模板
 router.get('/templet', controllers.templet.get)
-router.get('/templet', controllers.templet.post)
+router.post('/templet', controllers.templet.post)
 
+//节点
+router.get('/collect', controllers.collect.get)
+router.post('/collect', controllers.collect.post)
 
-router.get('/templet_column', controllers.templet_column.get)
-
-router.get('/hello',controllers.hello)
+//所属模板地点
+router.get('/collectdetail', controllers.collectdetail.get)
 
 module.exports = router
