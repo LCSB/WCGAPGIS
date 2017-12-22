@@ -18,7 +18,7 @@
       <view class="params" wx:for="{{columns}}" wx:key="{{index}}">
       <label>{{"字段" + (index+1)}}</label>
       <input data-index="{{index}}" placeholder="请填写字段名" bindinput="paramValueChange" value="{{item.column_comment}}" />
-      <picker data-index="{{index}}" bindchange="typeValueChange" range-key="title" range="{{column_datatype}}">{{item.column_datatype}}</picker>
+      <picker data-index="{{index}}" bindchange="typeValueChange" range-key="column_comment" range="{{type}}">{{item.column_datatype}}</picker>
       <button bindtap="deleteParam" data-index="{{index}}" class="delete"></button>
       </view>
       <button id="submit" bindtap="submit"></button>
