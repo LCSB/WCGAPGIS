@@ -10,19 +10,15 @@ Page({
     temp_name: "",
     columns: [{
       column_comment: "姓名",
-      type: "text",
       column_datatype: "文本"
     }, {
       column_comment: "发货日期",
-      type: "date",
       column_datatype: "日期"
     }, {
       column_comment: "发货地区",
-      type: "region",
       column_datatype: "地区"
     }, {
       column_comment: "价格",
-      type: "digit",
       column_datatype: "数字"
     }],
     type: [{
