@@ -9,17 +9,42 @@ Page({
         logged: false,
         takeSession: false,
         requestResult: '',
+        selecting: "container",
+        controls: [{
+          id: 0,
+          position: {
+            left: 10,
+            top: 10,
+            width: 40,
+            height: 40
+          },
+          iconPath: "./addition_fill.png",
+          clickable: true,
+        }, {
+          id: 1,
+          position: {
+            left: 10,
+            top: 50,
+            width: 40,
+            height: 40
+          },
+          iconPath: "./stealth_fill.png",
+          clickable: true,
+        }]
     },
     onLoad: function() {
-        wx.request({
-            url: config.service.requestUrl,
-            method: "GET",
-            data: {},
-            success: function(res) {
-                console.log(res)
-            }
-        })
-        this.setData({ templates: getApp().templates });
+      // this.login();
+      this.setData({ templates: getApp().templates });
+
+      qcloud.request({
+        url: config.service.requestUrl,
+        method: "GET",
+        login: false,
+        data: {},
+        success: function (res) {
+          console.log(res)
+        }
+      });
     },
     // 用户登录示例
     login: function() {
@@ -226,5 +251,35 @@ Page({
         }
         util.showBusy('信道连接中...')
         this.setData({ tunnelStatus: 'closed' })
+    },
+    bindTemplateChange: function(e) {
+      console.log(e.detail.value)
+      this.setData({template: e.detail.value});
+    },
+    bindMapControl: function(e) {
+      switch (e.controlId){
+        case 0:
+          wx.navigateTo({
+            url: "../collection/collection"
+          });
+          break;
+        case 1:
+          if (this.data.selecting === "container showPicker") {
+            this.data.controls[1].iconPath = "./stealth_fill.png";
+            this.setData({
+              controls: this.data.controls,
+              selecting: "container"
+            });
+          }
+          else {
+            this.data.controls[1].iconPath = "./success_fill.png";
+            this.setData({
+              controls: this.data.controls,
+              selecting: "container showPicker"
+            });
+          }
+          break;
+
+      }
     }
 })

@@ -20,7 +20,7 @@ page {
     width: calc(100% - 40rpx);
     display: flex;
     justify-content: space-between;
-    margin: 10rpx;
+    margin: 10rpx 20rpx;
     font-size: 36rpx;
     line-height: 60rpx;
 }
@@ -38,15 +38,21 @@ button:after {
     border-radius: 10rpx;
     background-color: #1890ff;
 }
-#submit {
+#submit, #cancel {
     width: calc(100% - 40rpx);
     margin: 20rpx;
     height: 80rpx;
 }
-#submit:after {
-    content: "提交";
+#submit:after, #cancel:after {
     line-height: 160rpx;
     font-size: 60rpx;
+}
+#submit:after {
+    content: "提交";
+}
+#cancel:after {
+    content: "取消";
+    background: #f5222d;
 }
 .params input, .params picker {
   background: #FFFFFF;
@@ -67,7 +73,7 @@ button:after {
   flex: 1;
 }
 .params picker {
-  flex-basis: 120rpx;
+  flex-basis: 150rpx;
 }
 .delete, #create {
   height:42rpx;
@@ -100,4 +106,18 @@ button:after {
 }
 input {
   flex: 1;
+}
+.staticParams {
+  display: flex;
+  flex-direction: column;
+}
+.staticParam {
+  border-color: #000;
+  background: #e8e8e8;
+  padding: 10rpx;
+  font-size: 30rpx;
+  margin: 10rpx;
+  width: 150rpx;
+  border-radius: 10rpx;
+  text-align-last: justify;
 }

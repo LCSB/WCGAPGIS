@@ -5,25 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude: "114.3701929",
-    latitude: "30.884436244",
+    longitude: "114.31665",
+    latitude: "30.554408",
     markers: [],
-    params: [{
-      title: "姓名",
-      type: "text",
-      typeName: "文本"
+    index: 0,
+    name: "",
+    columns: [{
+      column_comment: "姓名",
+      column_datatype: "文本"
     }, {
-      title: "发起日期",
-      type: "date",
-      typeName: "日期"
+      column_comment: "发起日期",
+      column_datatype: "日期"
     }, {
-      title: "发货地区",
-      type: "region",
-      typeName: "地区"
+      column_comment: "闹钟",
+      column_datatype: "时间"
     }, {
-      title: "价格",
-      type: "digit",
-      typeName: "数字"
+      column_comment: "发货地区",
+      column_datatype: "地区"
+    }, {
+      column_comment: "价格",
+      column_datatype: "数字"
+    }, {
+      column_comment: "身份证号",
+      column_datatype: "身份证号"
+    }, {
+      column_comment: "联系方式",
+      column_datatype: "电话号码"
     }],
   },
 
@@ -35,16 +42,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '添加采集点'
     });
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res)
-        this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        });
-      }.bind(this)
-    });
+    this.getCurrentLocation();
   },
 
   /**
@@ -95,15 +93,22 @@ Page({
   onShareAppMessage: function () {
   
   },
+
+  bindNameChange: function(e) {
+    this.setData({
+      name: e.detail.value
+    });
+  },
+
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
-    })
+    });
   },
 
   getCurrentLocation: function() {
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: function (res) {
         this.setData({
           markers: [{
@@ -138,5 +143,20 @@ Page({
     this.setData({
       params: this.data.params
     })
+  },
+  addPhoto: function() {
+    wx.chooseImage({
+      count: 1,
+      success: function(e){
+        wx.previewImage({
+          urls: e.tempFilePaths
+        });
+      }
+    })
+  },
+  cancel:  function(){
+    wx.navigateTo({
+      url: "../index/index"
+    });
   }
 })

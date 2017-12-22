@@ -2,48 +2,33 @@
 page {
     background: #fff;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    /* flex-direction: column; */
+    justify-content: flex-start; 
     height: 100%;
+    width: calc(100% + 300rpx);
 }
 .container {
   display: flex;
   height: 100%;
+  width: 100vw;
   flex-direction: column;
+}
+.showPicker {
+  position: absolute;
+  top:0;
+  left:300rpx;
 }
 map {
   flex: 1;
   width: 100%;
 }
-#addCollection {
-  position: absolute;
-  top:10rpx;
-  right: 10rpx; 
-  height:62rpx;
-  width: 62rpx;
-  line-height: 60rpx;
-  text-align: center;
-  background-color: rgba(255, 0, 0, 0);
-}
-#addCollection:after {
-  content: "+";
-  font-size: 90rpx;
-  height: 120rpx;
-  width: 120rpx;
-  line-height: 100rpx;
-  color: #FFFFFF;
-  text-align: center;
-  border-radius: 60rpx;
-  background-color: #1890ff;
-}
 .template {
-  position: absolute;
-  top: 10rpx;
-  left: 10rpx;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   height: 100%;
+  width: 300rpx;
 }
-.template button {
-  margin: 5rpx;
+view {
+  text-align-last: center
 }
