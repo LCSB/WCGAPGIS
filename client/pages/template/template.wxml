@@ -2,8 +2,14 @@
 <view class="container">
     <view class="form">
       <view>
-        <view>模版名称：</view>
-        <input />
+        <view style="font-size: 30rpx;padding-left: 20rpx;">类别名称：</view>
+        <input bindchange="bindNameChange"/>
+      </view>
+      <view class="staticParams" style="background: rgba(0,0,0,0)">
+        <label>固定字段</label>
+        <label class="staticParam">采集点名称</label>
+        <label class="staticParam">地理位置</label>
+        <label class="staticParam">详细地址</label>
       </view>
       <view style="background: rgba(0,0,0,0)">
         <label>自定义字段信息</label>
@@ -11,10 +17,11 @@
       </view>
       <view class="params" wx:for="{{params}}" wx:key="{{index}}">
       <label>{{"字段" + (index+1)}}</label>
-      <input data-index="{{index}}" bindinput="paramValueChange" value="{{item.title}}" />
+      <input data-index="{{index}}" placeholder="请填写字段名" bindinput="paramValueChange" value="{{item.title}}" />
       <picker data-index="{{index}}" bindchange="typeValueChange" range-key="title" range="{{type}}">{{item.typeName}}</picker>
       <button bindtap="deleteParam" data-index="{{index}}" class="delete"></button>
       </view>
+      <button id="submit" bindtap="cancel"></button>
+      <button id="cancel" bindtap="cancel"></button>
     </view>
-    <button id="submit"></button>
 </view>

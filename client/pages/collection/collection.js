@@ -5,9 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    longitude: "114.3701929",
-    latitude: "30.884436244",
+    longitude: "114.31665",
+    latitude: "30.554408",
     markers: [],
+    index: 0,
+    name: "",
     params: [{
       title: "姓名",
       type: "text",
@@ -17,6 +19,10 @@ Page({
       type: "date",
       typeName: "日期"
     }, {
+      title: "闹钟",
+      type: "time",
+      typeName: "时间"
+    }, {
       title: "发货地区",
       type: "region",
       typeName: "地区"
@@ -24,6 +30,14 @@ Page({
       title: "价格",
       type: "digit",
       typeName: "数字"
+    }, {
+      title: "身份证号",
+      type: "idcard",
+      typeName: "身份证号"
+    }, {
+      title: "联系方式",
+      type: "phone",
+      typeName: "电话号码"
     }],
   },
 
@@ -35,16 +49,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '添加采集点'
     });
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res)
-        this.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        });
-      }.bind(this)
-    });
+    this.getCurrentLocation();
   },
 
   /**
@@ -95,15 +100,22 @@ Page({
   onShareAppMessage: function () {
   
   },
+
+  bindNameChange: function(e) {
+    this.setData({
+      name: e.detail.value
+    });
+  },
+
   bindPickerChange: function (e) {
     this.setData({
       index: e.detail.value
-    })
+    });
   },
 
   getCurrentLocation: function() {
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
       success: function (res) {
         this.setData({
           markers: [{
@@ -138,5 +150,20 @@ Page({
     this.setData({
       params: this.data.params
     })
+  },
+  addPhoto: function() {
+    wx.chooseImage({
+      count: 1,
+      success: function(e){
+        wx.previewImage({
+          urls: e.tempFilePaths
+        });
+      }
+    })
+  },
+  cancel:  function(){
+    wx.navigateTo({
+      url: "../index/index"
+    });
   }
 })

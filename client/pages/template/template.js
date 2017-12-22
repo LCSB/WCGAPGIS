@@ -5,12 +5,13 @@ Page({
    * 页面的初始数据
    */
   data: {
+    name: "",
     params: [{
       title: "姓名",
       type: "text",
       typeName: "文本"
     }, {
-      title: "发起日期",
+      title: "发货日期",
       type: "date",
       typeName: "日期"
     }, {
@@ -51,7 +52,7 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '新建采集点模版'
+      title: '新建采集点类别'
     });
   },
 
@@ -123,7 +124,17 @@ Page({
   },
 
   createParam: function(){
-    this.data.params.push({typeName: "类型"});
+    this.data.params.push({typeName: "请选择类型"});
     this.setData({ params: this.data.params });
+  },
+  bindNameChange: function(){
+    this.setData({
+      name: e.detail.value
+    });
+  },
+  cancel: function () {
+    wx.navigateTo({
+      url: "../collection/collection"
+    });
   }
 })

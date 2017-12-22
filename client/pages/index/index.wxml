@@ -1,10 +1,17 @@
 <!--index.wxml-->
-<view class="container">
-    <map longitude="114.31665" latitude="30.554408"></map>
-    <navigator url="../collection/collection" open-type="navigate">
-      <button id="addCollection"></button>
-    </navigator>
-    <view class="template">
-      <button wx:for="{{templates}}" wx:key="{{item.name}}">{{item.name}}</button>
-    </view>
+ <view class="{{selecting}}">
+    <map
+      longitude="114.31665"
+      latitude="30.554408"
+      controls="{{controls}}"
+      bindcontroltap="bindMapControl"
+    >
+    </map>
+</view> 
+ <view class="template">
+  <picker-view indicator-style="height: 40rpx;" style="width: 100%; height: 300px;" bindchange="bindTemplateChange">
+    <picker-view-column>
+      <view wx:key="{{item.name}}" wx:for="{{templates}}">{{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
 </view>

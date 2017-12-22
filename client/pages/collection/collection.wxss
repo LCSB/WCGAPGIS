@@ -47,17 +47,23 @@ button:after {
     width: 120rpx;
 }
 #addTemplate:after {
-    content: "新建";
+    content: "新增类别";
 }
-#submit {
+#submit, #cancel {
     width: calc(100% - 40rpx);
     margin: 20rpx;
     height: 80rpx;
 }
-#submit:after {
-    content: "提交";
+#submit:after, #cancel:after {
     line-height: 160rpx;
     font-size: 60rpx;
+}
+#submit:after {
+    content: "提交";
+}
+#cancel:after {
+    content: "取消";
+    background: #f5222d;
 }
 #currentLocation:after {
     content: "我的位置";
@@ -65,13 +71,19 @@ button:after {
 #assignLocation:after {
     content: "指定位置";
 }
+#addPhoto {
+  flex:1;
+}
+#addPhoto:after {
+    content: "添加照片"
+}
 view text {
   flex-basis: 150rpx;
   text-align-last: justify;
   text-align: justify;
   padding-right: 20rpx;
 }
-text {
+text, .text {
   font-size: 30rpx;
 }
 .inputPH {
