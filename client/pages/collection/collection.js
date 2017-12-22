@@ -10,34 +10,27 @@ Page({
     markers: [],
     index: 0,
     name: "",
-    params: [{
-      title: "姓名",
-      type: "text",
-      typeName: "文本"
+    columns: [{
+      column_comment: "姓名",
+      column_datatype: "文本"
     }, {
-      title: "发起日期",
-      type: "date",
-      typeName: "日期"
+      column_comment: "发起日期",
+      column_datatype: "日期"
     }, {
-      title: "闹钟",
-      type: "time",
-      typeName: "时间"
+      column_comment: "闹钟",
+      column_datatype: "时间"
     }, {
-      title: "发货地区",
-      type: "region",
-      typeName: "地区"
+      column_comment: "发货地区",
+      column_datatype: "地区"
     }, {
-      title: "价格",
-      type: "digit",
-      typeName: "数字"
+      column_comment: "价格",
+      column_datatype: "数字"
     }, {
-      title: "身份证号",
-      type: "idcard",
-      typeName: "身份证号"
+      column_comment: "身份证号",
+      column_datatype: "身份证号"
     }, {
-      title: "联系方式",
-      type: "phone",
-      typeName: "电话号码"
+      column_comment: "联系方式",
+      column_datatype: "电话号码"
     }],
   },
 

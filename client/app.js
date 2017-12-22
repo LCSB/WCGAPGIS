@@ -3,10 +3,14 @@ var qcloud = require('./vendor/wafer2-client-sdk/index')
 var config = require('./config')
 
 App({
-    templates: [
-      { name: "wifi点" }, { name: "消防栓" }, { name: "旅店" }, { name: "网吧" },
-    ],
+    templates: [],
     onLaunch: function () {
         qcloud.setLoginUrl(config.service.loginUrl)
+        qcloud.request({
+          url: config.service.templetUrl,
+          success: function(res){
+            this.templates = res.data;
+          }.bind(this)
+        })
     }
 })

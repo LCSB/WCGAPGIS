@@ -23,7 +23,9 @@ var config = {
         // 上传图片接口
         uploadUrl: `${host}/weapp/upload`,
 
-        messageUrl: `${host}/weapp/message`
+        messageUrl: `${host}/weapp/message`,
+        
+        templetUrl: `${host}/weapp/templet`
     }
 };
 

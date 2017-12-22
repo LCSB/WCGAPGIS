@@ -1,48 +1,50 @@
 // pages/template/template.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name: "",
-    params: [{
-      title: "姓名",
+    temp_name: "",
+    columns: [{
+      column_comment: "姓名",
       type: "text",
-      typeName: "文本"
+      column_datatype: "文本"
     }, {
-      title: "发货日期",
+      column_comment: "发货日期",
       type: "date",
-      typeName: "日期"
+      column_datatype: "日期"
     }, {
-      title: "发货地区",
+      column_comment: "发货地区",
       type: "region",
-      typeName: "地区"
+      column_datatype: "地区"
     }, {
-      title: "价格",
+      column_comment: "价格",
       type: "digit",
-      typeName: "数字"
+      column_datatype: "数字"
     }],
     type: [{
-      title: "文本",
+      column_comment: "文本",
       value: "text"
     }, {
-      title: "数字",
+      column_comment: "数字",
       value: "digit"
     }, {
-      title: "日期",
+      column_comment: "日期",
       value: "date"
     }, {
-      title: "电话号码",
+      column_comment: "电话号码",
       value: "phone"
     }, {
-      title: "身份证号",
+      column_comment: "身份证号",
       value: "idcard"
     }, {
-      title: "时间",
+      column_comment: "时间",
       value: "time"
     }, {
-      title: "地区",
+      column_comment: "地区",
       value: "region"
     }]
   },
@@ -107,30 +109,46 @@ Page({
 
   paramValueChange: function(e) {
     var index = e.currentTarget.dataset.index;
-    this.data.params[index].title = e.detail.value;
-    this.setData({params: this.data.params});
+    this.data.columns[index].column_comment = e.detail.value;
+    this.setData({columns: this.data.columns});
   },
 
   typeValueChange: function (e) {
     var index = e.currentTarget.dataset.index;
-    this.data.params[index].type = this.data.type[e.detail.value].value; this.data.params[index].typeName = this.data.type[e.detail.value].title;
-    this.setData({ params: this.data.params });
+    this.data.columns[index].type = this.data.type[e.detail.value].value; this.data.columns[index].column_datatype = this.data.type[e.detail.value].column_comment;
+    this.setData({ columns: this.data.columns });
   },
 
   deleteParam: function(e){
     var index = e.currentTarget.dataset.index;
-    this.data.params.splice(index, 1);
-    this.setData({ params: this.data.params });
+    this.data.columns.splice(index, 1);
+    this.setData({ columns: this.data.columns });
   },
 
   createParam: function(){
-    this.data.params.push({typeName: "请选择类型"});
-    this.setData({ params: this.data.params });
+    this.data.columns.push({column_datatype: "请选择类型"});
+    this.setData({ columns: this.data.columns });
   },
-  bindNameChange: function(){
+  bindNameChange: function(e){
     this.setData({
-      name: e.detail.value
+      temp_name: e.detail.value
     });
+  },
+  submit: function() {
+    qcloud.request({
+      url: config.service.templetUrl,
+      method: "POST",
+      data: {
+        temp_name: this.data.temp_name,
+        columns: this.data.columns
+      },
+      success: function(res){
+        console.log(res);
+        wx.navigateTo({
+          url: "../collection/collection"
+        });
+      }
+    })
   },
   cancel: function () {
     wx.navigateTo({
