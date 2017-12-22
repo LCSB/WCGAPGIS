@@ -10,6 +10,7 @@
         <label class="staticParam">采集点名称</label>
         <label class="staticParam">地理位置</label>
         <label class="staticParam">详细地址</label>
+        <label class="staticParam">照片</label>
       </view>
       <view style="background: rgba(0,0,0,0)">
         <label>自定义字段信息</label>

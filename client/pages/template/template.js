@@ -22,26 +22,19 @@ Page({
       column_datatype: "数字"
     }],
     type: [{
-      column_comment: "文本",
-      value: "text"
+      column_comment: "文本"
     }, {
-      column_comment: "数字",
-      value: "digit"
+      column_comment: "数字"
     }, {
-      column_comment: "日期",
-      value: "date"
+      column_comment: "日期"
     }, {
-      column_comment: "电话号码",
-      value: "phone"
+      column_comment: "电话号码"
     }, {
-      column_comment: "身份证号",
-      value: "idcard"
+      column_comment: "身份证号"
     }, {
-      column_comment: "时间",
-      value: "time"
+      column_comment: "时间"
     }, {
-      column_comment: "地区",
-      value: "region"
+      column_comment: "地区"
     }]
   },
 

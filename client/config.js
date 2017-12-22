@@ -25,7 +25,11 @@ var config = {
 
         messageUrl: `${host}/weapp/message`,
         
-        templetUrl: `${host}/weapp/templet`
+        //采集点类别接口
+        templetUrl: `${host}/weapp/templet`,
+
+        //采集点接口
+        collectionUrl: `${host}/weapp/collection`,
     }
 };
 

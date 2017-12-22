@@ -33,18 +33,18 @@ Page({
         }]
     },
     onLoad: function() {
-      // this.login();
+      this.login();
       this.setData({ templates: getApp().templates });
 
-      qcloud.request({
-        url: config.service.requestUrl,
-        method: "GET",
-        login: false,
-        data: {},
-        success: function (res) {
-          console.log(res)
-        }
-      });
+      // qcloud.request({
+      //   url: config.service.requestUrl,
+      //   method: "GET",
+      //   login: false,
+      //   data: {},
+      //   success: function (res) {
+      //     console.log(res)
+      //   }
+      // });
     },
     // 用户登录示例
     login: function() {
@@ -58,6 +58,25 @@ Page({
             success(result) {
                 if (result) {
                     util.showSuccess('登录成功')
+                    if (!result.idcard) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '小程序需要实名认证后方可使用',
+                        confirmText: '拍照认证',
+                        success: function() {
+                          var cameraContext = wx.createCameraContext(this)
+                          cameraContext.takePhoto({
+                            success: function(){
+                              that.setData({
+                                userInfo: result,
+                                logged: true
+                              })
+                            }
+                          });
+                        }
+                      });
+                      return;
+                    }
                     that.setData({
                         userInfo: result,
                         logged: true
