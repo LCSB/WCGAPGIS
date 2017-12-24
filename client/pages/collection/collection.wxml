@@ -5,41 +5,45 @@
     <view class="params">
       <picker bindchange="bindPickerChange" range-key="temp_name" range="{{templates}}">
         <view class="text">
-            请选择类别: {{templates[index].temp_name}}
+            请选择类别: {{template.temp_name}}
         </view>
       </picker>
       <navigator url="../template/template" open-type="navigate"> 
-        <button id="addTemplate"></button> 
+        <!-- <button id="addTemplate"></button>  -->
+        <image class="path" src="../image/path.png"></image>
       </navigator>
     </view>
-    <label>固定字段</label>
+    <view class="label">固定字段</view>
     <view class="params">
       <text>采集点名称</text>
       <input placeholder='请输入采集点名称' bindchange="bindNameChange" placeholder-class='inputPH'></input>
     </view>
-    <view class="params">
+    <view bindtap="getAssignLocation" class="params" >
       <text>请选择位置</text>
-      <button id="currentLocation" bindtap="getCurrentLocation"></button>
-      <button id="assignLocation" bindtap="getAssignLocation"></button>
+      <input placeholder='当前位置' placeholder-class='inputPH' value="{{address}}" class="inputPH"></input>
+      <image class="path" src="../image/path.png"></image>
     </view>
-    <view class="params" style="justify-content:left">
-      <button id="addPhoto" bindtap="addPhoto"></button>
+    <view style="justify-content:left" style="padding: 32rpx;display:flex;" bindtap="addPhoto">
+      <image wx-if="{{imgUrl !== ''}}" src="{{imgUrl}}" bindtap="addPhoto"></image>
+      <view class="addPhoto">+</view>
+      <input style="margin: 20rpx;" placeholder-class='inputPH' placeholder='添加图片' class="inputPH"></input>
+      <!-- <button wx-if="{{imgUrl === ''}}" bindtap="addPhoto"></button> -->
     </view>
-    <label>自定义字段</label>
-    <view class="params" wx:for="{{columns}}" wx:key="{{item.column_comment}}">
+    <view class="label" wx-if="{{template.columns.length}}">自定义字段</view>
+    <view class="params" wx:for="{{template.columns}}" wx:key="{{item.column_comment}}">
       <text>{{item.column_comment}}</text>
       <input wx:if="{{item.column_datatype === '文本'}}" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
       <input wx:if="{{item.column_datatype === '身份证号'}}"  type="idcard" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
       <input wx:if="{{item.column_datatype === '电话号码'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
       <input wx:if="{{item.column_datatype === '数字'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
       <picker wx:if="{{item.column_datatype === '日期'}}" data-index="{{index}}" mode="date" bindchange="paramValueChange" value="{{item.value}}">
-        <text class="inputPH">{{item.value || "2017-12-21"}}</text>
+        <text class="inputPH">{{item.value}}</text>
       </picker>
       <picker wx:if="{{item.column_datatype === '时间'}}" data-index="{{index}}" mode="time" bindchange="paramValueChange" value="{{item.value}}">
         <text class="inputPH">{{item.value || "00:00"}}</text>
       </picker>
-      <picker wx:if="{{item.column_datatype === '地区'}}" data-index="{{index}}" mode="region" bindchange="paramValueChange" value="{{['湖北省', '武汉市', '武昌区']}}">
-        <text class="inputPH">{{item.value || '湖北省,武汉市,武昌区'}}</text>
+      <picker wx:if="{{item.column_datatype === '地区'}}" data-index="{{index}}" mode="region" bindchange="paramValueChange" value="{{item.tempValue}}">
+        <text class="inputPH">{{item.tempValue || '湖北省, 武汉市, 武昌区'}}</text>
       </picker>
     </view>
     <button id="submit" bindtap="submit"></button>

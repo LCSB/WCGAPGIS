@@ -9,42 +9,42 @@ Page({
         logged: false,
         takeSession: false,
         requestResult: '',
-        selecting: "container",
-        controls: [{
-          id: 0,
-          position: {
-            left: 10,
-            top: 10,
-            width: 40,
-            height: 40
-          },
-          iconPath: "./addition_fill.png",
-          clickable: true,
-        }, {
-          id: 1,
-          position: {
-            left: 10,
-            top: 50,
-            width: 40,
-            height: 40
-          },
-          iconPath: "./stealth_fill.png",
-          clickable: true,
-        }]
+        selecting: false,
+        collection: [],
+        current: [],
+        markers: [],
+        tempIndex: 0
     },
     onLoad: function() {
-      this.login();
-      this.setData({ templates: getApp().templates });
-
-      // qcloud.request({
-      //   url: config.service.requestUrl,
-      //   method: "GET",
-      //   login: false,
-      //   data: {},
-      //   success: function (res) {
-      //     console.log(res)
-      //   }
-      // });
+      qcloud.request({
+        url: config.service.templetUrl,
+        success: function (res) {
+          this.setData({
+            templates: res.data
+          })
+        }.bind(this)
+      });
+      this.getCurrentLocation();
+    },
+    getCurrentLocation: function () {
+      wx.getLocation({
+        type: 'gcj02',
+        success: function (res) {
+          var current = [{
+            latitude: res.latitude,
+            longitude: res.longitude,
+            iconPath: "../image/current.png",
+            height: 40,
+            width: 40
+          }];
+          this.setData({
+            current: current,
+            markers: this.data.collection.concat(current),
+            latitude: res.latitude,
+            longitude: res.longitude
+          });
+        }.bind(this)
+      })
     },
     // 用户登录示例
     login: function() {
@@ -272,33 +272,47 @@ Page({
         this.setData({ tunnelStatus: 'closed' })
     },
     bindTemplateChange: function(e) {
-      console.log(e.detail.value)
-      this.setData({template: e.detail.value});
+      this.loadCollection(e.detail.value);
     },
-    bindMapControl: function(e) {
-      switch (e.controlId){
-        case 0:
-          wx.navigateTo({
-            url: "../collection/collection"
+    loadCollection: function(index) {
+      qcloud.request({
+        url: config.service.collectUrl,
+        method: "GET",
+        login: false,
+        data: {
+          tempId: this.data.templates[index].temp_id
+        },
+        success: function (res) {
+          for (var i of res.data) {
+            console.log(i);
+            i.iconPath = '../image/marker.png';
+            i.callout = {
+              content: i.name || ''
+            }
+            // i.label = {
+            //   content: i.name,
+            //   textAlign: 'center',
+            //   y: -70,
+            //   x: -15,
+            //   bgColor: '#fff',
+            //   padding: 5
+            // }
+          }
+          this.setData({
+            collection: res.data,
+            markers: res.data.concat(this.data.current),
           });
-          break;
-        case 1:
-          if (this.data.selecting === "container showPicker") {
-            this.data.controls[1].iconPath = "./stealth_fill.png";
-            this.setData({
-              controls: this.data.controls,
-              selecting: "container"
-            });
-          }
-          else {
-            this.data.controls[1].iconPath = "./success_fill.png";
-            this.setData({
-              controls: this.data.controls,
-              selecting: "container showPicker"
-            });
-          }
-          break;
-
-      }
+        }.bind(this)
+      });
+    },
+    addCollection: function() {
+      wx.navigateTo({
+        url: "../collection/collection"
+      });
+    },
+    showTemplate: function () {
+      this.setData({
+        selecting: !this.data.selecting
+      });
     }
 })

@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/addCgi/addCgi",
     "pages/template/template",
     "pages/collection/collection",
     "pages/authorization/authorization"

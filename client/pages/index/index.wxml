@@ -1,17 +1,23 @@
 <!--index.wxml-->
- <view class="{{selecting}}">
+ <view class="{{selecting ? 'container showPicker' : 'container'}}">
     <map
-      longitude="114.31665"
-      latitude="30.554408"
-      controls="{{controls}}"
-      bindcontroltap="bindMapControl"
+      longitude="{{longitude}}"
+      latitude="{{latitude}}"
+      markers='{{markers}}'
     >
     </map>
-</view> 
- <view class="template">
-  <picker-view indicator-style="height: 40rpx;" style="width: 100%; height: 300px;" bindchange="bindTemplateChange">
-    <picker-view-column>
-      <view wx:key="{{item.temp_id}}" wx:for="{{templates}}">{{item.temp_name}}</view>
-    </picker-view-column>
-  </picker-view>
+    
+  <view wx-if="{{selecting}}" class="templates">
+    <picker-view indicator-style="height: 40rpx;" style="width: 100%; height: 300px;" bindchange="bindTemplateChange">
+      <picker-view-column>
+        <view wx:key="{{item.temp_id}}" wx:for="{{templates}}">{{item.temp_name}}</view>
+      </picker-view-column>
+    </picker-view>
+  </view>  
+</view>
+<view class="toolbar">
+  <image src="../image/location.png" bindtap='getCurrentLocation'></image>
+  <image src="../image/collection.png" bindtap='addCollection'></image>
+  <image wx-if="{{!selecting}}" src="../image/menu.png" bindtap='showTemplate'></image>
+  <image wx-if="{{selecting}}" src="../image/close.png" bindtap='showTemplate'></image>
 </view>

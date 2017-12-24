@@ -29,7 +29,7 @@ var config = {
         templetUrl: `${host}/weapp/templet`,
 
         //采集点接口
-        collectionUrl: `${host}/weapp/collection`,
+        collectUrl: `${host}/weapp/collect`,
     }
 };
 

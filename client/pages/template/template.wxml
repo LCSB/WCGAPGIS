@@ -1,28 +1,30 @@
 <!--pages/collection/collection.wxml-->
 <view class="container">
-    <view class="form">
-      <view>
-        <view style="font-size: 30rpx;padding-left: 20rpx;">类别名称：</view>
-        <input bindchange="bindNameChange"/>
+    <scroll-view class="form">
+      <view class="title">
+        <view style="font-size: 30rpx;">类别名称：</view>
+        <input bindchange="bindNameChange" placeholder='请输入类别名称' placeholder-class='inputPH'/>
       </view>
       <view class="staticParams" style="background: rgba(0,0,0,0)">
-        <label>固定字段</label>
+        <view class="label">固定字段</view>
         <label class="staticParam">采集点名称</label>
         <label class="staticParam">地理位置</label>
         <label class="staticParam">详细地址</label>
         <label class="staticParam">照片</label>
       </view>
-      <view style="background: rgba(0,0,0,0)">
-        <label>自定义字段信息</label>
-        <button bindtap="createParam" id="create"></button>
+      <view class="label" style="display: flex;">
+        <view >自定义字段信息</view>
+        <image class="create" bindtap="createParam" src="../image/+.png"></image>
+        <!-- <button bindtap="createParam" id="create"></button> -->
       </view>
       <view class="params" wx:for="{{columns}}" wx:key="{{index}}">
       <label>{{"字段" + (index+1)}}</label>
       <input data-index="{{index}}" placeholder="请填写字段名" bindinput="paramValueChange" value="{{item.column_comment}}" />
       <picker data-index="{{index}}" bindchange="typeValueChange" range-key="column_comment" range="{{type}}">{{item.column_datatype}}</picker>
-      <button bindtap="deleteParam" data-index="{{index}}" class="delete"></button>
+      <image data-index="{{index}}" class="delete" bindtap="deleteParam" src="../image/-.png"></image>
+      <!-- <button  data-index="{{index}}" class="delete"></button> -->
       </view>
       <button id="submit" bindtap="submit"></button>
       <button id="cancel" bindtap="cancel"></button>
-    </view>
+    </scroll-view>
 </view>
