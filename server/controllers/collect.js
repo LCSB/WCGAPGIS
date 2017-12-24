@@ -1,4 +1,4 @@
-const { mysql } = require('../qcloud')
+﻿const { mysql } = require('../qcloud')
 
 
 //查询节点详细数据
@@ -33,7 +33,7 @@ async function post(ctx,next) {
   var params = ctx.request.body
   var fixed = {
     name: params.name,
-    address: params.addrss,
+    address: params.address,
     latitude: params.latitude,
     longitude: params.longitude,
     image: params.image,
