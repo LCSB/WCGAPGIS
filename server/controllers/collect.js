@@ -36,20 +36,21 @@ async function post(ctx,next) {
     address: params.address,
     latitude: params.latitude,
     longitude: params.longitude,
-    image: params.image
+    image: params.image,
+    temp_id: params.temp_id
   }
  
   var collects = params.columns
 
-  var id = await mysql("fixed_attribute").returning("id").update(fixed).where({ temp_id: params.temp_id})
-  var fix = await mysql("fixed_attribute").where({ temp_id: params.temp_id }).first()
+  var id = await mysql("fixed_attribute").returning("id").insert(fixed)
+  //var fix = await mysql("fixed_attribute").where({ temp_id: params.temp_id }).first()
   if (id>0) {
     var collect_list = []
     for (var collect of collects) {
       collect_list.push({
         column_id: collect.id,
         value: collect.value,
-        fixedId: fix.id
+        fixedId: id
       })
     }
 
