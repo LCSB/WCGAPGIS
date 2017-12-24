@@ -1,4 +1,4 @@
-﻿const { mysql } = require('../qcloud')
+const { mysql } = require('../qcloud')
 
 
 //查询节点详细数据
@@ -33,24 +33,23 @@ async function post(ctx,next) {
   var params = ctx.request.body
   var fixed = {
     name: params.name,
-    address: params.address,
+    addrss: params.addrss,
     latitude: params.latitude,
     longitude: params.longitude,
-    image: params.image,
-    temp_id: params.temp_id
+    image: params.image
   }
  
   var collects = params.columns
 
-  var id = await mysql("fixed_attribute").returning("id").insert(fixed)
-  //var fix = await mysql("fixed_attribute").where({ temp_id: params.temp_id }).first()
+  var id = await mysql("fixed_attribute").returning("id").update(fixed).where({ temp_id: params.temp_id})
+  var fix = await mysql("fixed_attribute").where({ temp_id: params.temp_id }).first()
   if (id>0) {
     var collect_list = []
     for (var collect of collects) {
       collect_list.push({
         column_id: collect.id,
         value: collect.value,
-        fixedId: id
+        fixedId: fix.id
       })
     }
 

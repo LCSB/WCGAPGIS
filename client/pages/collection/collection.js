@@ -1,4 +1,7 @@
 // pages/collection/collection.js
+var qcloud = require('../../vendor/wafer2-client-sdk/index')
+var config = require('../../config')
+var util = require('../../utils/util')
 Page({
 
   /**
@@ -7,38 +10,36 @@ Page({
   data: {
     longitude: "114.31665",
     latitude: "30.554408",
+    imgUrl: "",
     markers: [],
-    index: 0,
     name: "",
-    columns: [{
-      column_comment: "姓名",
-      column_datatype: "文本"
-    }, {
-      column_comment: "发起日期",
-      column_datatype: "日期"
-    }, {
-      column_comment: "闹钟",
-      column_datatype: "时间"
-    }, {
-      column_comment: "发货地区",
-      column_datatype: "地区"
-    }, {
-      column_comment: "价格",
-      column_datatype: "数字"
-    }, {
-      column_comment: "身份证号",
-      column_datatype: "身份证号"
-    }, {
-      column_comment: "联系方式",
-      column_datatype: "电话号码"
-    }],
+    columns: [],
+    address: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ templates: getApp().templates });
+    qcloud.request({
+      url: config.service.templetUrl,
+      success: function (res) {
+        var template = res.data[0];
+        var today = util.formatDate(new Date());
+        for (var i of template.columns) {
+          if (i.column_datatype === '地区') {
+            i.value = i.value || "['湖北省', '武汉市', '武昌区']";
+          }
+          if (i.column_datatype === '日期') {
+            i.value = i.value || today;
+          }
+          if (i.column_datatype === '时间') {
+            i.value = i.value || '00:00'
+          }
+        }
+        this.setData({ templates: res.data, template: template });
+      }.bind(this)
+    })
     wx.setNavigationBarTitle({
       title: '添加采集点'
     });
@@ -101,8 +102,21 @@ Page({
   },
 
   bindPickerChange: function (e) {
+    var template = this.data.templates[e.detail.value];
+    var today = util.formatDate(new Date());
+    for (var i of template.columns) {
+      if (i.column_datatype === '地区') {
+        i.value = i.value || "['湖北省', '武汉市', '武昌区']";
+      }
+      if (i.column_datatype === '日期') {
+        i.value = i.value || today;
+      }
+      if (i.column_datatype === '时间') {
+        i.value = i.value || '00:00'
+      }
+    }
     this.setData({
-      index: e.detail.value
+      template: template
     });
   },
 
@@ -114,7 +128,9 @@ Page({
           markers: [{
             latitude: res.latitude,
             longitude: res.longitude,
-            iconPath: "../index/marker.svg"
+            iconPath: "../image/current.png",
+            height: 40,
+            width: 40
           }],
           latitude: res.latitude,
           longitude: res.longitude
@@ -129,27 +145,61 @@ Page({
           markers: [{
             latitude: res.latitude,
             longitude: res.longitude,
-            iconPath: "../index/marker.svg"
+            iconPath: "../image/marker.png"
           }],
           latitude: res.latitude,
-          longitude: res.longitude
+          longitude: res.longitude,
+          address: res.name
         });
       }.bind(this)
     })
   },
   paramValueChange: function(e){
     var index = e.currentTarget.dataset.index;
-    this.data.params[index].value = e.detail.value;
+    if (typeof e.detail.value === 'object') {
+      this.data.template.columns[index].value = JSON.stringify(e.detail.value);
+      this.data.template.columns[index].tempValue = e.detail.value;
+    }
+    else
+      this.data.template.columns[index].value = e.detail.value;
     this.setData({
-      params: this.data.params
+      template: this.data.template
     })
   },
   addPhoto: function() {
     wx.chooseImage({
       count: 1,
       success: function(e){
-        wx.previewImage({
-          urls: e.tempFilePaths
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: e.tempFilePaths[0],
+          name: 'file',
+          success: function (res) {
+            this.setData({ imgUrl: JSON.parse(res.data).data.imgUrl });
+          }.bind(this),
+          fail: function (e) {
+            console.error(e)
+          }
+        });
+      }.bind(this)
+    })
+  },
+  submit: function () {
+    qcloud.request({
+      url: config.service.collectUrl,
+      method: "POST",
+      data: {
+        temp_id: this.data.template.temp_id,
+        name: this.data.name,
+        latitude: this.data.latitude,
+        longitude: this.data.longitude,
+        imgUrl: this.data.imgUrl,
+        columns: this.data.template.columns,
+        address: this.data.address
+      },
+      success: function (res) {
+        wx.navigateTo({
+          url: "../index/index"
         });
       }
     })

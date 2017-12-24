@@ -1,34 +1,45 @@
 /**index.wxss**/
 page {
-    background: #fff;
-    display: flex;
-    /* flex-direction: column; */
-    justify-content: flex-start; 
-    height: 100%;
-    width: calc(100% + 300rpx);
+  background: #fff;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-start; 
+  height: 100%;
+  overflow: hidden;
 }
 .container {
   display: flex;
-  height: 100%;
-  width: 100vw;
-  flex-direction: column;
-}
-.showPicker {
-  position: absolute;
-  top:0;
-  left:300rpx;
+  flex-direction: row;
+  flex: 1;
+  width: calc(100vw);
+  overflow: hidden;
 }
 map {
   flex: 1;
-  width: 100%;
+  width: 100vw;
+  height: 100%;
 }
-.template {
-  display: flex;
-  flex-direction: column;
+.templates {
+  flex-basis: 300rpx;
   justify-content: center;
   height: 100%;
   width: 300rpx;
 }
 view {
   text-align-last: center
+}
+.toolbar {
+  height: 112rpx;
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  width: 100vw;
+}
+.toolbar image {
+  height: 52rpx;
+  width: 52rpx;
+  margin: 30rpx 0;
+}
+.showPicker map {
+  width: calc(100vw - 300rpx);
 }

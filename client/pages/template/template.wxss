@@ -1,6 +1,6 @@
 /* pages/template/template.wxss *//* pages/collection/collection.wxss */
 page {
-    background: #f8f8f8;
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -15,32 +15,40 @@ page {
     flex: 1;
     width: 100%;
 }
-.form > view {
+.params, .title {
     background: #FFFFFF;
-    width: calc(100% - 40rpx);
+    width: calc(100% - 64rpx);
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    margin: 10rpx 20rpx;
+    padding: 20rpx 32rpx;
     font-size: 36rpx;
-    line-height: 60rpx;
+}
+.params {
+    line-height: 66rpx;
+    height: 66rpx;
+}
+.title {
+    line-height: 112rpx;
+    height: 112rpx;
 }
 button {
-    height: 62rpx;
-    line-height: 60rpx;
+    height: 66rpx;
+    line-height: 66rpx;
     text-align: center;
     background-color: rgba(255, 0, 0, 0);
 }
 button:after {
     font-size: 50rpx;
-    line-height: 120rpx;
+    line-height: 112rpx;
     color: #FFFFFF;
     text-align: center;
     border-radius: 10rpx;
-    background-color: #1890ff;
+    background-color: rgb(82, 168, 252);
 }
 #submit, #cancel {
-    width: calc(100% - 40rpx);
-    margin: 20rpx;
+    width: calc(100% - 64rpx);
+    margin: 32rpx;
     height: 80rpx;
 }
 #submit:after, #cancel:after {
@@ -52,17 +60,27 @@ button:after {
 }
 #cancel:after {
     content: "取消";
-    background: #f5222d;
+    background: rgb(186, 219, 252);
 }
 .params input, .params picker {
   background: #FFFFFF;
-  margin: 0 10rpx;
+  padding: 5rpx 32rpx;
+  height: 60rpx;
+  font-size: 30rpx;
+  border: 1rpx solid #f8f8f8;
+}
+.params input {
+  border-right-width: 0;
+}
+.title input {
+  background: #FFFFFF;
+  margin: 20rpx 32rpx;
   height: 60rpx;
   font-size: 30rpx;
 }
 .params label {
   flex-basis: 120rpx;
-  background: #1890ff !important;
+  background: rgb(82, 168, 252);
   color: #FFFFFF;
   text-align: center;
   border-top-left-radius: 10rpx;
@@ -75,35 +93,6 @@ button:after {
 .params picker {
   flex-basis: 150rpx;
 }
-.delete, #create {
-  height:42rpx;
-  width: 42rpx;
-  line-height: 40rpx;
-  background-color: rgba(255, 0, 0, 0);
-  margin: 10rpx;
-}
-.delete:after, #create:after {
-  flex-basis: 80rpx;
-  font-size: 60rpx;
-  font-weight: bold;
-  height: 80rpx;
-  width: 80rpx;
-  line-height: 58rpx;
-  text-align: center;
-  border-radius: 40rpx;
-  background-color: #FFFFFF;
-  border-width: 10rpx;
-}
-.delete:after {
-  content: "-";
-  border-color: #f5222d;
-  color: #f5222d;
-}
-#create:after {
-  content: "+";
-  border-color: #1890ff;
-  color: #1890ff;
-}
 input {
   flex: 1;
 }
@@ -113,11 +102,33 @@ input {
 }
 .staticParam {
   border-color: #000;
-  background: #e8e8e8;
-  padding: 10rpx;
+  background: rgb(245, 246, 250);
+  padding: 20rpx;
   font-size: 30rpx;
-  margin: 10rpx;
-  width: 150rpx;
+  margin: 10rpx 32rpx;
   border-radius: 10rpx;
   text-align-last: justify;
+  width: 200rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.create, .delete {
+  height: 40rpx;
+  width: 40rpx;
+  padding: 20rpx 10rpx;
+}
+.label {
+  background: #f8f8f8;
+  height: 66rpx;
+  padding: 15rpx 32rpx;
+  width: calc(100vw -  64rpx);
+  font-size: 36rpx;
+  line-height: 66rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputPH {
+  font-size: 30rpx;
+  padding: 5rpx;
 }

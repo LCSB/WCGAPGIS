@@ -32,8 +32,8 @@ async function post(ctx,next) {
     }
     var id = await mysql("templet").returning("id").insert(templet)
     if (id > 0) {
-      //var fixedId = await mysql("fixed_attribute").returning("id").insert({ temp_id: id })
-     // if (fixedId > 0) {
+      var fixedId = await mysql("fixed_attribute").returning("id").insert({ temp_id: id })
+      if (fixedId > 0) {
         var column_list = []
         for (var column of columns) {
           column_list.push({
@@ -58,7 +58,7 @@ async function post(ctx,next) {
           ctx.body = "error"
         }
 
-     // }
+      }
 
     }
   }

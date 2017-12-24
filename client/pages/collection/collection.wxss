@@ -1,6 +1,6 @@
 /* pages/collection/collection.wxss */
 page {
-    background: #f8f8f8;
+    background: #FFFFFF;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -15,14 +15,25 @@ page {
     flex: 1;
     width: 100%;
 }
+
+.label {
+  background: #f8f8f8;
+  height: 66rpx;
+  padding: 15rpx 32rpx;
+  width: 100vw;
+  font-size: 40rpx;
+}
 .params {
     background: #FFFFFF;
-    width: calc(100% - 20rpx);
+    width: calc(100% - 64rpx);
     display: flex;
     justify-content: space-between;
-    padding: 10rpx;
+    padding: 15rpx 0;
+    margin: 0 32rpx;
     font-size: 36rpx;
     line-height: 60rpx;
+    height: 66rpx;
+    border-bottom: 1rpx solid #f2f2f2;
 }
 map {
     flex: 1;
@@ -40,7 +51,8 @@ button:after {
     color: #FFFFFF;
     text-align: center;
     border-radius: 10rpx;
-    background-color: #1890ff;
+    background-color: rgb(82, 168, 252);
+    border-color: rgb(82, 168, 252);
 }
 #addTemplate, #currentLocation, #assignLocation {
     flex-basis: 120rpx;
@@ -50,8 +62,8 @@ button:after {
     content: "新增类别";
 }
 #submit, #cancel {
-    width: calc(100% - 40rpx);
-    margin: 20rpx;
+    width: calc(100% - 64rpx);
+    margin: 32rpx;
     height: 80rpx;
 }
 #submit:after, #cancel:after {
@@ -63,7 +75,7 @@ button:after {
 }
 #cancel:after {
     content: "取消";
-    background: #f5222d;
+    background: rgb(186, 219, 252);
 }
 #currentLocation:after {
     content: "我的位置";
@@ -72,7 +84,7 @@ button:after {
     content: "指定位置";
 }
 #addPhoto {
-  flex:1;
+  flex: 1;
 }
 #addPhoto:after {
     content: "添加照片"
@@ -96,4 +108,18 @@ picker, input{
 label {
   padding: 10rpx;
   font-size: 32rpx;
+}
+.path {
+  height: 26rpx;
+  width: 16rpx;
+  padding: 20rpx;
+}
+.addPhoto {
+  height: 112rpx;
+  width: 112rpx;
+  font-size: 90rpx;
+  text-align: center;
+  line-height: 112rpx;
+  border: 1rpx solid #c8c8c8;
+  color: #c8c8c8;
 }
