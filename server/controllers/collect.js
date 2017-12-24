@@ -33,7 +33,7 @@ async function post(ctx,next) {
   var params = ctx.request.body
   var fixed = {
     name: params.name,
-    addrss: params.addrss,
+    address: params.addrss,
     latitude: params.latitude,
     longitude: params.longitude,
     image: params.image,
