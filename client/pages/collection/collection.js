@@ -149,14 +149,15 @@ Page({
           }],
           latitude: res.latitude,
           longitude: res.longitude,
-          address: res.name
+          address: res.address,
+          name: this.data.name || res.name
         });
       }.bind(this)
     })
   },
   paramValueChange: function(e){
     var index = e.currentTarget.dataset.index;
-    if (typeof e.detail.value === 'object') {
+    if (this.data.template && typeof e.detail.value === 'object') {
       this.data.template.columns[index].value = JSON.stringify(e.detail.value);
       this.data.template.columns[index].tempValue = e.detail.value;
     }

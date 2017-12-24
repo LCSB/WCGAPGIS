@@ -16,7 +16,7 @@
     <view class="label">固定字段</view>
     <view class="params">
       <text>采集点名称</text>
-      <input placeholder='请输入采集点名称' bindchange="bindNameChange" placeholder-class='inputPH'></input>
+      <input placeholder='请输入采集点名称' bindchange="bindNameChange" placeholder-class='inputPH' class="inputPH"></input>
     </view>
     <view bindtap="getAssignLocation" class="params" >
       <text>请选择位置</text>
@@ -32,10 +32,10 @@
     <view class="label" wx-if="{{template.columns.length}}">自定义字段</view>
     <view class="params" wx:for="{{template.columns}}" wx:key="{{item.column_comment}}">
       <text>{{item.column_comment}}</text>
-      <input wx:if="{{item.column_datatype === '文本'}}" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
-      <input wx:if="{{item.column_datatype === '身份证号'}}"  type="idcard" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
-      <input wx:if="{{item.column_datatype === '电话号码'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
-      <input wx:if="{{item.column_datatype === '数字'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}"/>
+      <input wx:if="{{item.column_datatype === '文本'}}" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}" class="inputPH"/>
+      <input wx:if="{{item.column_datatype === '身份证号'}}"  type="idcard" data-index="{{index}}" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}" class="inputPH"/>
+      <input wx:if="{{item.column_datatype === '电话号码'}}" data-index="{{index}}"  type="number" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}" class="inputPH"/>
+      <input wx:if="{{item.column_datatype === '数字'}}" data-index="{{index}}"  type="digit" bindinput="paramValueChange" placeholder="{{'点击输入' + item.column_comment}}" placeholder-class='inputPH' value="{{item.value}}" class="inputPH"/>
       <picker wx:if="{{item.column_datatype === '日期'}}" data-index="{{index}}" mode="date" bindchange="paramValueChange" value="{{item.value}}">
         <text class="inputPH">{{item.value}}</text>
       </picker>
