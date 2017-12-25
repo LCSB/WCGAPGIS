@@ -12,8 +12,7 @@ Page({
         selecting: false,
         collection: [],
         current: [],
-        markers: [],
-        tempIndex: 0
+        markers: []
     },
     onLoad: function() {
       qcloud.request({
@@ -273,6 +272,11 @@ Page({
     },
     bindTemplateChange: function(e) {
       this.loadCollection(e.detail.value);
+    },
+    selectLayer: function(e) {
+      var index = e.currentTarget.dataset.index;
+      this.setData({ tempIndex: index });
+      this.loadCollection(index);
     },
     loadCollection: function(index) {
       qcloud.request({

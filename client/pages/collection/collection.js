@@ -28,6 +28,7 @@ Page({
         var today = util.formatDate(new Date());
         for (var i of template.columns) {
           if (i.column_datatype === '地区') {
+            i.tempValue = i.value || ['湖北省', '武汉市', '武昌区'];
             i.value = i.value || "['湖北省', '武汉市', '武昌区']";
           }
           if (i.column_datatype === '日期') {
@@ -106,6 +107,7 @@ Page({
     var today = util.formatDate(new Date());
     for (var i of template.columns) {
       if (i.column_datatype === '地区') {
+        i.tempValue = i.value || ['湖北省', '武汉市', '武昌区'];
         i.value = i.value || "['湖北省', '武汉市', '武昌区']";
       }
       if (i.column_datatype === '日期') {

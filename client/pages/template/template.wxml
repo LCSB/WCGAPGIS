@@ -15,14 +15,15 @@
       <view class="label" style="display: flex;">
         <view >自定义字段信息</view>
         <image class="create" bindtap="createParam" src="../image/+.png"></image>
-        <!-- <button bindtap="createParam" id="create"></button> -->
       </view>
       <view class="params" wx:for="{{columns}}" wx:key="{{index}}">
       <label>{{"字段" + (index+1)}}</label>
       <input data-index="{{index}}" placeholder="请填写字段名" bindinput="paramValueChange" value="{{item.column_comment}}" />
-      <picker data-index="{{index}}" bindchange="typeValueChange" range-key="column_comment" range="{{type}}">{{item.column_datatype}}</picker>
+      <picker data-index="{{index}}" bindchange="typeValueChange" range-key="column_comment" range="{{type}}">
+        <text>{{item.column_datatype}}</text>
+        <image class="down" src="../image/down.png"></image>
+      </picker>
       <image data-index="{{index}}" class="delete" bindtap="deleteParam" src="../image/-.png"></image>
-      <!-- <button  data-index="{{index}}" class="delete"></button> -->
       </view>
       <button id="submit" bindtap="submit"></button>
       <button id="cancel" bindtap="cancel"></button>

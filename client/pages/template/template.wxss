@@ -132,3 +132,9 @@ input {
   font-size: 30rpx;
   padding: 5rpx;
 }
+
+.down {
+  height: 10rpx;
+  width: 16rpx;
+  margin: 8rpx;
+}

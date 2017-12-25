@@ -8,16 +8,15 @@
     </map>
     
   <view wx-if="{{selecting}}" class="templates">
-    <picker-view indicator-style="height: 40rpx;" style="width: 100%; height: 300px;" bindchange="bindTemplateChange">
-      <picker-view-column>
-        <view wx:key="{{item.temp_id}}" wx:for="{{templates}}">{{item.temp_name}}</view>
-      </picker-view-column>
-    </picker-view>
-  </view>  
-</view>
-<view class="toolbar">
-  <image src="../image/location.png" bindtap='getCurrentLocation'></image>
-  <image src="../image/collection.png" bindtap='addCollection'></image>
-  <image wx-if="{{!selecting}}" src="../image/menu.png" bindtap='showTemplate'></image>
-  <image wx-if="{{selecting}}" src="../image/close.png" bindtap='showTemplate'></image>
-</view>
+    <view wx:key="{{item.temp_id}}" wx:for="{{templates}}">
+      <view class="template" wx-if="{{index !== tempIndex}}" data-index='{{index}}' bindtap="selectLayer">{{item.temp_name}}</view>
+      <view class="template selected" wx-if="{{index === tempIndex}}" data-index='{{index}}' bindtap="selectLayer">{{item.temp_name}}</view>
+    </view>
+  </view>
+  </view>
+  <view class="toolbar">
+    <image src="../image/location.png" bindtap='getCurrentLocation'></image>
+    <image src="../image/collection.png" bindtap='addCollection'></image>
+    <image wx-if="{{!selecting}}" src="../image/menu.png" bindtap='showTemplate'></image>
+    <image wx-if="{{selecting}}" src="../image/close.png" bindtap='showTemplate'></image>
+  </view>
