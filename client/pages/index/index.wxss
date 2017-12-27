@@ -37,6 +37,7 @@ map {
   border: 1rpx solid rgba(240, 240, 240, .5);
   background: #fbfbfb;
   /* flex: 1; */
+  text-align: center;
   text-align-last: justify;
   color: #898b8b;
   font-size: 32rpx;

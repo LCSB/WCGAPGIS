@@ -91,7 +91,7 @@ button:after {
   flex: 1;
 }
 .params picker {
-  flex-basis: 150rpx;
+  flex-basis: 180rpx;
 }
 input {
   flex: 1;

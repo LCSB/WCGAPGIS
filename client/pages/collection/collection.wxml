@@ -3,11 +3,16 @@
     <map markers="{{markers}}" longitude="{{longitude}}" latitude="{{latitude}}"></map>  
   <scroll-view scroll-y="{{true}}" class="form">
     <view class="params">
-      <picker bindchange="bindPickerChange" range-key="temp_name" range="{{templates}}">
+      <picker wx-if="{{templates.length}}" bindtap="bindPickerTap" bindchange="bindPickerChange" range-key="temp_name" range="{{templates}}">
         <view class="text">
             请选择类别: {{template.temp_name}}
         </view>
       </picker>
+      <navigator style="flex: 1" url="../template/template" open-type="navigate" wx-if="{{!templates.length}}" >
+        <view class="text">
+            请选择类别: 点击新增类别
+        </view>
+      </navigator>
       <navigator url="../template/template" open-type="navigate"> 
         <!-- <button id="addTemplate"></button>  -->
         <image class="path" src="../image/path.png"></image>
@@ -24,7 +29,7 @@
       <image class="path" src="../image/path.png"></image>
     </view>
     <view style="justify-content:left" style="padding: 32rpx;display:flex;" bindtap="addPhoto">
-      <image wx-if="{{imgUrl !== ''}}" src="{{imgUrl}}" bindtap="addPhoto"></image>
+      <image style="height: 112rpx;width: 112rpx;" wx-if="{{imgUrl !== ''}}" src="{{imgUrl}}" bindtap="addPhoto"></image>
       <view class="addPhoto">+</view>
       <input style="margin: 20rpx;" placeholder-class='inputPH' placeholder='添加图片' class="inputPH"></input>
       <!-- <button wx-if="{{imgUrl === ''}}" bindtap="addPhoto"></button> -->

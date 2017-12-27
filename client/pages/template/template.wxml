@@ -3,7 +3,7 @@
     <scroll-view class="form">
       <view class="title">
         <view style="font-size: 30rpx;">类别名称：</view>
-        <input bindchange="bindNameChange" placeholder='请输入类别名称' placeholder-class='inputPH'/>
+        <input bindchange="bindNameChange" placeholder='请输入类别名称' placeholder-class='inputPH' class="inputPH"/>
       </view>
       <view class="staticParams" style="background: rgba(0,0,0,0)">
         <view class="label">固定字段</view>

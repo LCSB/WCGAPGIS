@@ -10,9 +10,9 @@ Page({
   data: {
     longitude: "114.31665",
     latitude: "30.554408",
+    templates: [],
     imgUrl: "",
     markers: [],
-    name: "",
     columns: [],
     address: ""
   },
@@ -24,6 +24,7 @@ Page({
     qcloud.request({
       url: config.service.templetUrl,
       success: function (res) {
+        if (!res.data.length) return;
         var template = res.data[0];
         var today = util.formatDate(new Date());
         for (var i of template.columns) {
@@ -102,6 +103,14 @@ Page({
     });
   },
 
+  bindPickerTap: function() {
+    if(this.data.templates.length === 0) {
+      wx.navigateTo({
+        url: "../template/template"
+      });
+    }
+  },
+
   bindPickerChange: function (e) {
     var template = this.data.templates[e.detail.value];
     var today = util.formatDate(new Date());
@@ -152,7 +161,7 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude,
           address: res.address,
-          name: this.data.name || res.name
+          name: this.data.name === '' ? res.name : this.data.name
         });
       }.bind(this)
     })

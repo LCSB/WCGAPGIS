@@ -12,11 +12,13 @@ Page({
         selecting: false,
         collection: [],
         current: [],
-        markers: []
+        markers: [],
+        tempIndex: -1
     },
     onLoad: function() {
       qcloud.request({
         url: config.service.templetUrl,
+        login: true,
         success: function (res) {
           this.setData({
             templates: res.data
@@ -275,14 +277,27 @@ Page({
     },
     selectLayer: function(e) {
       var index = e.currentTarget.dataset.index;
-      this.setData({ tempIndex: index });
-      this.loadCollection(index);
+      console.log(index, this.data.tempIndex)
+      if (index === this.data.tempIndex) {
+        console.log(index);
+        this.setData({
+          tempIndex: -1,
+          collection: [],
+          markers: this.data.current,
+        });
+      }
+      else {
+        this.loadCollection(index);
+      }
     },
     loadCollection: function(index) {
+      this.setData({
+        collection: [],
+        markers: this.data.current
+      });
       qcloud.request({
         url: config.service.collectUrl,
         method: "GET",
-        login: false,
         data: {
           tempId: this.data.templates[index].temp_id
         },
@@ -303,6 +318,7 @@ Page({
             // }
           }
           this.setData({
+            tempIndex: index,
             collection: res.data,
             markers: res.data.concat(this.data.current),
           });
